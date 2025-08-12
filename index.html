@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Fire Fan Site - HTML Dreams</title>
+  <meta name="description" content="A fan site dedicated to Free Fire with characters, weapons, tips and more." />
+  <meta name="keywords" content="Free Fire, gaming, characters, weapons, tips, battle royale" />
+  <meta name="author" content="Rishon Upreti" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #121212;
+      color: #eee;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: #f97316;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ffa500;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #ff4e50, #f9d423);
+      padding: 20px 0;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      color: #121212;
+      box-shadow: 0 2px 8px rgba(255, 78, 80, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 10px #f97316, 0 0 20px #f97316; }
+      50% { text-shadow: 0 0 20px #ffa500, 0 0 30px #ffa500; }
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://wallpapercave.com/wp/wp5933813.jpg') center/cover no-repeat;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #ffb347;
+      text-shadow: 2px 2px 5px #000;
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18,18,18,0.7), rgba(18,18,18,0.9));
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    .hero-content h2 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    /* Section Titles */
+    section {
+      padding: 60px 0;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #f97316;
+      margin-bottom: 40px;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* About Section */
+    #about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* Characters Gallery */
+    #characters .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+    .character-card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .character-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #f97316;
+    }
+    .character-card img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .character-info {
+      padding: 15px;
+      text-align: center;
+      color: #ffb347;
+    }
+    .character-info h3 {
+      margin-bottom: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .character-info p {
+      font-size: 0.9rem;
+      color: #eee;
+    }
+
+    /* Weapons Section */
+    #weapons .weapon-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+    .weapon-card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      width: 260px;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+      padding: 20px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+      color: #ffb347;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .weapon-card:hover {
+      background: #2f2f2f;
+    }
+    .weapon-card img {
+      width: 150px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .weapon-card h4 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+    .weapon-card p {
+      font-size: 0.9rem;
+      color: #ddd;
+      text-align: center;
+    }
+
+    /* Tips Accordion */
+    #tips .accordion {
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+      background: #1f1f1f;
+    }
+    .accordion-item {
+      border-bottom: 1px solid #333;
+    }
+    .accordion-header {
+      background: #2f2f2f;
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffb347;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+    .accordion-header:hover {
+      background: #f97316;
+      color: #121212;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: #1f1f1f;
+      padding: 0 20px;
+      color: #ddd;
+      font-size: 1rem;
+    }
+    .accordion-content p {
+      padding: 15px 0;
+    }
+    .accordion-header::after {
+      content: '+';
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+    }
+    .accordion-header.active::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+
+    /* Contact Form */
+    #contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #1f1f1f;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+      color: #ddd;
+    }
+    #contact label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      background: #2f2f2f;
+      color: #eee;
+      resize: vertical;
+      transition: background 0.3s ease;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      background: #444;
+      outline: none;
+    }
+    #contact button {
+      background: #f97316;
+      border: none;
+      color: #121212;
+      font-weight: 700;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact button:hover {
+      background: #ffa500;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      background: #111;
+      color: #666;
+      font-size: 0.9rem;
+      user-select: none;
+      margin-top: 50px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .hero {
+        height: 350px;
+      }
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+      #characters .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+      #weapons .weapon-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .weapon-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FREE FIRE FAN SITE</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#characters">Characters</a>
+      <a href="#weapons">Weapons</a>
+      <a href="#tips">Tips</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to the Ultimate Free Fire Fan Site</h2>
+      <p>Discover characters, weapons, tips, and all you need to dominate the battleground.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Free Fire</h2>
+      <p>
+        Free Fire is a popular battle royale mobile game developed by 111 Dots Studio and published by Garena. Players are dropped on an island and must
+        fight to be the last one standing. With fast-paced gameplay, diverse characters, and a variety of weapons and strategies, Free Fire keeps millions
+        of players worldwide hooked.
+      </p>
+    </div>
+  </section>
+
+  <section id="characters">
+    <div class="container">
+      <h2>Characters</h2>
+      <div class="gallery">
+        <div class="character-card" tabindex="0">
+          <img src="https://static.ff.garena.com/event/eu/character/kelly.png" alt="Kelly" />
+          <div class="character-info">
+            <h3>Kelly</h3>
+            <p>Known for her speed, Kelly can help you outrun your opponents and dominate the field.</p>
+          </div>
+        </div>
+        <div class="character-card" tabindex="0">
+          <img src="https://static.ff.garena.com/event/eu/character/aldair.png" alt="Aldair" />
+          <div class="character-info">
+            <h3>Aldair</h3>
+            <p>With powerful fire abilities, Aldair is a formidable tank on the battlefield.</p>
+          </div>
+        </div>
+        <div class="character-card" tabindex="0">
+          <img src="https://static.ff.garena.com/event/eu/character/moco.png" alt="Moco" />
+          <div class="character-info">
+            <h3>Moco</h3>
+            <p>A tech genius who can tag enemies with her hacking skills for the entire team.</p>
+          </div>
+        </div>
+        <div class="character-card" tabindex="0">
+          <img src="https://static.ff.garena.com/event/eu/character/hayato.png" alt="Hayato" />
+          <div class="character-info">
+            <h3>Hayato</h3>
+            <p>A samurai warrior with a focus on improving armor penetration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="weapons">
+    <div class="container">
+      <h2>Weapons</h2>
+      <div class="weapon-list">
+        <div class="weapon-card" tabindex="0">
+          <img src="https://gamepedia.cursecdn.com/freefire_gamepedia/thumb/1/19/AK47_icon.png/120px-AK47_icon.png" alt="AK47" />
+          <h4>AK47</h4>
+          <p>The classic assault rifle with high damage, effective at mid-range combat.</p>
+        </div>
+        <div class="weapon-card" tabindex="0">
+          <img src="https://gamepedia.cursecdn.com/freefire_gamepedia/thumb/0/07/MP40_icon.png/120px-MP40_icon.png" alt="MP40" />
+          <h4>MP40</h4>
+          <p>A powerful submachine gun ideal for close-quarter battles with a high fire rate.</p>
+        </div>
+        <div class="weapon-card" tabindex="0">
+          <img src="https://gamepedia.cursecdn.com/freefire_gamepedia/thumb/c/c6/M1014_icon.png/120px-M1014_icon.png" alt="M1014" />
+          <h4>M1014</h4>
+          <p>A shotgun capable of dealing devastating damage at close range.</p>
+        </div>
+        <div class="weapon-card" tabindex="0">
+          <img src="https://gamepedia.cursecdn.com/freefire_gamepedia/thumb/8/84/AWM_icon.png/120px-AWM_icon.png" alt="AWM" />
+          <h4>AWM</h4>
+          <p>High precision sniper rifle perfect for long-distance eliminations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="container">
+      <h2>Tips & Tricks</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" tabindex="0">Master Your Landing</div>
+          <div class="accordion-content">
+            <p>Choose your landing spot wisely — landing in high loot areas is great, but can be risky. Practice quick looting and keep an eye on the safe zone.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" tabindex="0">Use Cover Effectively</div>
+          <div class="accordion-content">
+            <p>Always use trees, rocks, and buildings to shield yourself from enemy fire. Avoid open areas whenever possible.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" tabindex="0">Manage Your Inventory</div>
+          <div class="accordion-content">
+            <p>Carry a balanced loadout including healing items, grenades, and both short and long-range weapons to adapt to any fight.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" tabindex="0">Communicate with Team</div>
+          <div class="accordion-content">
+            <p>Use voice chat or quick messages to coordinate attacks, warn about enemies, and plan your moves with your squad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <form id="contactForm" onsubmit="return handleSubmit(event)">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name" required />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your email" required />
+        
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Your message" required></textarea>
+        
+        <button type="submit">Send Message</button>
+        <p id="responseMsg" style="margin-top: 15px;"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Free Fire Fan Site | Created by Rishon Upreti
+  </footer>
+
+  <script>
+    // Accordion functionality
+    const accHeaders = document.querySelectorAll('.accordion-header');
+    accHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        if (header.classList.contains('active')) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+      // Keyboard accessibility
+      header.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          header.click();
+        }
+      });
+    });
+
+    // Contact form submit handler (front-end only)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const response = document.getElementById('responseMsg');
+
+      if (name && email && message) {
+        response.style.color = '#4caf50';
+        response.textContent = `Thank you, ${name}! Your message has been sent (not really, this is a demo).`;
+        document.getElementById('contactForm').reset();
+      } else {
+        response.style.color = '#f44336';
+        response.textContent = 'Please fill out all fields.';
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
